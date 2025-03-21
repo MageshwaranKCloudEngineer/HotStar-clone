@@ -74,7 +74,9 @@ pipeline {
 
         stage('Deploy Docker') {
             steps {
-                sh "docker run --rm -d --name hotstar -p 3000:3000 magesh506/hotstar:latest"
+                sh "docker stop hotstar || true"
+                sh "docker rm -f hotstar || true"
+                sh "docker run -d --name hotstar -p 3000:3000 magesh506/hotstar:latest"
             }
         }
     }
